@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,14 +27,6 @@ namespace AngularSpa
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true
-                });
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
@@ -47,11 +35,28 @@ namespace AngularSpa
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller}/{action=Index}/{id?}");
+            });
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+            // Handles any other request by serving the Angular application from the
+            // specified public URL path
+            app.UseSpa(publicPath: "/dist", configure: spa =>
+            {
+                /*
+                // If you want to enable server-side prerendering for your app, then:
+                // [1] Edit your application .csproj file and set the BuildServerSideRenderer
+                //     property to 'true' so that the entrypoint file is built on publish
+                // [2] Uncomment this code block
+                spa.UsePrerendering("ClientApp/dist-server/main.bundle.js",
+                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuild("ssr") : null);
+                */
+
+                if (env.IsDevelopment())
+                {
+                    // In development, the Angular application does not have to be built
+                    // already, as it will be served dynamically via the Angular CLI
+                    spa.UseAngularCliMiddleware(sourcePath: "./ClientApp");
+                }
             });
         }
     }
