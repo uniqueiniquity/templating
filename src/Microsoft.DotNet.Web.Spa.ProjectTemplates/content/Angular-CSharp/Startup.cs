@@ -48,7 +48,7 @@ namespace AngularSpa
                 //     property to 'true' so that the entrypoint file is built on publish
                 // [2] Uncomment this code block
                 spa.UsePrerendering("ClientApp/dist-server/main.bundle.js",
-                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuild("ssr") : null);
+                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null);
                 */
 
                 if (env.IsDevelopment())
