@@ -38,26 +38,31 @@ namespace AngularSpa
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            // Handles any other request by serving the Angular application from the
-            // specified public URL path
-            app.UseSpa(publicPath: "/dist", configure: spa =>
-            {
-                /*
-                // If you want to enable server-side prerendering for your app, then:
-                // [1] Edit your application .csproj file and set the BuildServerSideRenderer
-                //     property to 'true' so that the entrypoint file is built on publish
-                // [2] Uncomment this code block
-                spa.UsePrerendering("ClientApp/dist-server/main.bundle.js",
-                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null);
-                */
+            UseSpa(app, env,
+                sourcePath: "ClientApp",
+                urlPrefix: "/dist");
+        }
 
-                if (env.IsDevelopment())
-                {
-                    // In development, the Angular application does not have to be built
-                    // already, as it will be served dynamically via the Angular CLI
-                    spa.UseAngularCliMiddleware(sourcePath: "./ClientApp");
-                }
-            });
+        private void UseSpa(IApplicationBuilder app, IHostingEnvironment env,
+            string sourcePath, string urlPrefix)
+        {
+            // If you want to enable server-side prerendering for your app, then: 
+            // [1] Edit your application .csproj file and set the BuildServerSideRenderer 
+            //     property to 'true' so that the entrypoint file is built on publish 
+            // [2] Uncomment this code block
+            app.UseSpaPrerendering($"{sourcePath}/dist-server/main.bundle.js", urlPrefix,
+                buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null);
+
+            if (env.IsDevelopment())
+            {
+                // In development, the wwwroot/dist directory does not need to exist on
+                // disk - its files will be built and served dynamically via Angular CLI
+                app.UseAngularCliServer(sourcePath, urlPrefix);
+            }
+
+            // Any remaining requests will serve 'index.html' so that client-side routing 
+            // can take effect 
+            app.UseSpaDefaultPage(urlPrefix);
         }
     }
 }
