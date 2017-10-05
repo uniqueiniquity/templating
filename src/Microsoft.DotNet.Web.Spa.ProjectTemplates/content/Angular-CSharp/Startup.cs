@@ -38,30 +38,22 @@ namespace AngularSpa
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            ConfigureSpa(app, env, urlPrefix: "/dist");
-        }
-
-        private void ConfigureSpa(IApplicationBuilder app, IHostingEnvironment env, string urlPrefix)
-        {
-            /*
-            // If you want to enable server-side prerendering for your app, then: 
-            // [1] Edit your application .csproj file and set the BuildServerSideRenderer 
-            //     property to 'true' so that the entrypoint file is built on publish 
-            // [2] Uncomment this code block
-            app.UseSpaPrerendering($"ClientApp/dist-server/main.bundle.js", urlPrefix,
-                buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null);
-            */
-
-            if (env.IsDevelopment())
+            app.UseSpa("/dist", configure: () =>
             {
-                // In development, the wwwroot/dist directory does not need to exist on
-                // disk - its files will be built and served dynamically via Angular CLI
-                app.UseAngularCliServer(urlPrefix, sourcePath: "ClientApp");
-            }
+                /*
+                // If you want to enable server-side prerendering for your app, then: 
+                // [1] Edit your application .csproj file and set the BuildServerSideRenderer 
+                //     property to 'true' so that the entrypoint file is built on publish 
+                // [2] Uncomment this code block
+                app.UseSpaPrerendering($"ClientApp/dist-server/main.bundle.js",
+                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null);
+                */
 
-            // Any remaining requests will serve 'index.html' so that client-side routing 
-            // can take effect 
-            app.UseSpaDefaultPage(urlPrefix);
+                if (env.IsDevelopment())
+                {
+                    app.UseAngularCliServer(sourcePath: "ClientApp");
+                }
+            });
         }
     }
 }
