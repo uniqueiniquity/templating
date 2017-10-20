@@ -38,6 +38,8 @@ namespace AngularSpa
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            app.UseWebSockets();
+
             app.UseSpa("/dist", configure: () =>
             {
                 /*
