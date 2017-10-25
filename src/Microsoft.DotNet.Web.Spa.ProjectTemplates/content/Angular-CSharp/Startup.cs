@@ -47,8 +47,9 @@ namespace AngularSpa
                 // [1] Edit your application .csproj file and set the BuildServerSideRenderer 
                 //     property to 'true' so that the entrypoint file is built on publish 
                 // [2] Uncomment this code block
-                app.UseSpaPrerendering($"ClientApp/dist-server/main.bundle.js",
-                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null);
+                app.UseSpaPrerendering("ClientApp/dist-server/main.bundle.js",
+                    buildOnDemand: env.IsDevelopment() ? new AngularCliBuilder("ssr") : null,
+                    excludeUrls: new[] { "/dist", "/sockjs-node" });
                 */
 
                 if (env.IsDevelopment())
