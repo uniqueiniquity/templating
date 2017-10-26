@@ -20,9 +20,11 @@
   "sourceName": "Company.WebApplication1",
   "preferNameDirectory": true,
   "guids": [
-    "09732173-2cef-46b7-83db-1334bcb079d3", // Tenant ID
-    "53bc9b9d-9d6a-45d4-8429-2a2761773502" // Client ID
+    "09732173-2cef-46b7-83db-1334bcb079d3",
+    "53bc9b9d-9d6a-45d4-8429-2a2761773502"
   ],
+  // Tenant ID
+  // Client ID
   "sources": [
     {
       "modifiers": [
@@ -263,60 +265,6 @@
       "datatype": "bool",
       "description": "If specified, skips the automatic restore of the project on create.",
       "defaultValue": "false"
-    },
-    "MicrosoftAspNetCoreAllPackageVersion": {
-      "type": "generated",
-      "description": "The package version for Microsoft.AspNetCore.All",
-      "generator": "constant",
-      "parameters": {
-        "value": "${MicrosoftAspNetCoreAllPackageVersion}"
-      },
-      "replaces": "$(MicrosoftAspNetCoreAllPackageVersion)"
-    },
-    "MicrosoftAspNetCorePackageVersion": {
-      "type": "generated",
-      "description": "The package version for Microsoft.AspNetCore",
-      "generator": "constant",
-      "parameters": {
-        "value": "${MicrosoftAspNetCorePackageVersion}"
-      },
-      "replaces": "$(MicrosoftAspNetCorePackageVersion)"
-    },
-    "MicrosoftExtensionsSecretManagerToolsPackageVersion": {
-      "type": "generated",
-      "description": "The package version for Microsoft.Extensions.SecretManager.Tools",
-      "generator": "constant",
-      "parameters": {
-        "value": "${MicrosoftExtensionsSecretManagerToolsPackageVersion}"
-      },
-      "replaces": "$(MicrosoftExtensionsSecretManagerToolsPackageVersion)"
-    },
-    "MicrosoftVisualStudioWebCodeGenerationToolsPackageVersion": {
-      "type": "generated",
-      "description": "The package version for Microsoft.VisualStudio.Web.CodeGeneration.Tools",
-      "generator": "constant",
-      "parameters": {
-        "value": "${MicrosoftVisualStudioWebCodeGenerationToolsPackageVersion}"
-      },
-      "replaces": "$(MicrosoftVisualStudioWebCodeGenerationToolsPackageVersion)"
-    },
-    "MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion": {
-      "type": "generated",
-      "description": "The package version for Microsoft.AspNetCore.Authentication.JwtBearer",
-      "generator": "constant",
-      "parameters": {
-        "value": "${MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion}"
-      },
-      "replaces": "$(MicrosoftAspNetCoreAuthenticationJwtBearerPackageVersion)"
-    },
-    "MicrosoftAspNetCoreMvcPackageVersion": {
-      "type": "generated",
-      "description": "The package version for Microsoft.AspNetCore.Mvc",
-      "generator": "constant",
-      "parameters": {
-        "value": "${MicrosoftAspNetCoreMvcPackageVersion}"
-      },
-      "replaces": "$(MicrosoftAspNetCoreMvcPackageVersion)"
     }
   },
   "primaryOutputs": [
